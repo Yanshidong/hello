@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.wd7</groupId>
+	<artifactId>parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>parent</name>
+	<description>spring cloud parent</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.1.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<!--<log4j2.version>2.1</log4j2.version>-->
+		<java.version>1.8</java.version>
+		<!--<sharding-jdbc>2.0.3</sharding-jdbc>-->
+		<!--<hutool.version>4.1.13</hutool.version>-->
+		<swagger.version>2.9.2</swagger.version>
+		<!--<core.version>1.0.1</core.version>-->
+		<!--<disruptor.version>3.4.1</disruptor.version>-->
+		<swagger.m.version>1.0.6</swagger.m.version>
+		<docker.image.prefix>wd7</docker.image.prefix>
+		<!--<spring-boot.version>2.1.1.RELEASE</spring-boot.version>-->
+		<spring-platform.version>Cairo-SR3</spring-platform.version>
+		<!--<spring-security.version>5.1.1.RELEASE</spring-security.version>-->
+		<security-oauth2.version>2.3.4.RELEASE</security-oauth2.version>
+		<!--<hibernate-validator.verion>5.0.2.Final</hibernate-validator.verion>-->
+		<!--<commons-collections4.version>4.1</commons-collections4.version>-->
+		<!--<fastjson.version>1.2.47</fastjson.version>-->
+		<jasypt.version>1.14</jasypt.version>
+		<spring-boot-dependencies.version>2.1.1.RELEASE</spring-boot-dependencies.version>
+		<spring-cloud-dependencies.version>Greenwich.M3</spring-cloud-dependencies.version>
+		<parent.version>0.0.1-SNAPSHOT</parent.version>
+		<spring-cloud.version>Greenwich.M3</spring-cloud.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.retry</groupId>
+			<artifactId>spring-retry</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<modules>
+		<module>client1</module>
+		<module>client2</module>
+		<module>gateway</module>
+		<module>eureka-server</module>
+	</modules>
+	<dependencyManagement>
+
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot-dependencies.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.spring.platform</groupId>
+				<artifactId>platform-bom</artifactId>
+				<version>${spring-platform.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<developers>
+		<developer>
+			<id>1</id>
+			<name>007</name>
+			<email>wangde007@outlook.com</email>
+            <organization>go any where</organization>
+		</developer>
+	</developers>
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+</project>
