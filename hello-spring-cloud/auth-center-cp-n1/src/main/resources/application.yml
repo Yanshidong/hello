@@ -1,0 +1,76 @@
+server:
+  port: 8083
+#  servlet:
+#    context-path: /
+#    session:
+#      cookie:
+#        domain: localhost
+#        name: wd7
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://7dwd7.com:8000/eureka/
+  instance:
+    hostname: 7dwd7.com
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+    instance-id: ${spring.application.name}:${server.port}
+spring:
+  redis:
+    host: 7dwd7.com
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1ms
+      shutdown-timeout: 100ms
+    database: 0
+  datasource:
+#    url: jdbc:mysql://127.0.0.1:3306/wd71?characterEncoding=UTF-8
+    url: jdbc:mysql://7dwd7:3306/oauth-center?characterEncoding=UTF-8
+    username: root
+    password: baicai@930715
+    driver-class-name: com.mysql.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  devtools:
+    restart:
+      enabled: true
+  application:
+    name: auth-center-cp-n1
+#  cloud:
+#    config:
+#      label: master
+#      profile: dev
+#      discovery:
+#        enabled: true
+#        service-id: configserver
+  session:
+    redis:
+      flush-mode: immediate
+
+logging:
+  level:
+    root: info
+    org.springframework.web: error
+    org.springframework.security: debug
+    org.springframework.jpa: debug
+#    com.cjs.example.dao: info
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: com.wd7.sso.entity
+
+wd7:
+  oauth2:
+    code:
+      timeout: 600
+      prefix: oauth2`code`
+
