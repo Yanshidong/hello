@@ -1,7 +1,9 @@
-package com.wd7.authcenter.config;
+package com.wd7.authcentercpn1.config;
 
-import com.wd7.authcenter.support.MyClientDetailsService;
-import com.wd7.authcenter.support.MyUserDetailsService;
+import com.wd7.authcentercpn1.override.CustomRedisTokenStore;
+import com.wd7.authcentercpn1.support.MyAuthorizationCodeServices;
+import com.wd7.authcentercpn1.support.MyClientDetailsService;
+import com.wd7.authcentercpn1.support.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +32,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableAuthorizationServer
-public class CustomAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     private RedisConnectionFactory connectionFactory;
@@ -42,6 +44,7 @@ public class CustomAuthorizationServerConfig extends AuthorizationServerConfigur
     private MyClientDetailsService myClientDetailsService;
 
 
+//    @Qualifier("authenticationManager")
     @Autowired
     AuthenticationManager authenticationManager;
 
@@ -56,12 +59,20 @@ public class CustomAuthorizationServerConfig extends AuthorizationServerConfigur
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-//        super.configure(security);
+        super.configure(security);
         security
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()")
                 .allowFormAuthenticationForClients()
                 .passwordEncoder(new BCryptPasswordEncoder())
+
+
+        ;
+
+
+//        security.realm("realm?")
+//        security.checkTokenAccess();//这里是token校验的？
+
         ;
 
     }
@@ -69,8 +80,25 @@ public class CustomAuthorizationServerConfig extends AuthorizationServerConfigur
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 
-        clients.withClientDetails(myClientDetailsService)
+        //region 测试用 将 clientDetails 写内存
+//        clients.inMemory()
+//                .withClient("barClientIdPassword")
+//                .secret(bCryptPasswordEncoder.encode("secret"))
+//                .authorizedGrantTypes("authorization_code", "refresh_token","password")
+//                .scopes("userInfo:view", "userInfo:add", "execute")
+//                .redirectUris("https://www.getpostman.com/oauth2/callback")
         ;
+        //endregion
+
+        //region 将 client信息 写jdbc,在表 oauth_client_details
+//        clients.jdbc(dataSource);
+
+        //endregion
+        clients.withClientDetails(myClientDetailsService)
+                ;
+
+//        tokenStore().;
+
     }
 
     //配置token存储位置
@@ -89,19 +117,19 @@ public class CustomAuthorizationServerConfig extends AuthorizationServerConfigur
 
 //        .setClientDetailsService(myClientDetailsService);
 
-                .approvalStore(new JdbcApprovalStore(dataSource)) //jdbc,每次认证后会更新一次用户关于这个client的认证记录,这个还是写数据库比较好
+        .approvalStore(new JdbcApprovalStore(dataSource)) //jdbc,每次认证后会更新一次用户关于这个client的认证记录,这个还是写数据库比较好
 
-                .authenticationManager(authenticationManager) //默认
+        .authenticationManager(authenticationManager) //默认
 
         .userDetailsService(userDetailsService) //jdbc,慢了之后可以直接从这里迁移到redis或其他高速数据库,查询用户信息
 
-                .authorizationCodeServices(myAuthorizationCodeServices) //redis,这东西读写 code,
+        .authorizationCodeServices(myAuthorizationCodeServices) //redis,这东西读写 code,
 
-                .tokenEnhancer(tokenEnhancerChain)
+        .tokenEnhancer(tokenEnhancerChain)
 
-                .requestValidator(oAuth2RequestValidator)
+        .requestValidator(oAuth2RequestValidator)
 
-                .tokenServices(defaultTokenServices())
+        .tokenServices(defaultTokenServices())
 
 
 
@@ -138,4 +166,19 @@ public class CustomAuthorizationServerConfig extends AuthorizationServerConfigur
         tokenServices.setRefreshTokenValiditySeconds(86400*7);
         return tokenServices;
     }
+//
+//    @Bean(name = "OAuth2AuthenticationManager")
+//    public OAuth2AuthenticationManager oAuth2AuthenticationManager()
+//    {
+//        return new OAuth2AuthenticationManager();
+//    }
+
+//    @Bean
+//    public JwtAccessTokenConverter accessTokenConverter() {
+//        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+//        return converter;
+//    }
+
+
+
 }

@@ -29,8 +29,8 @@ spring:
       shutdown-timeout: 100ms
     database: 0
   datasource:
-#    url: jdbc:mysql://127.0.0.1:3306/wd71?characterEncoding=UTF-8
-    url: jdbc:mysql://7dwd7:3306/oauth-center?characterEncoding=UTF-8
+    url: jdbc:mysql://127.0.0.1:3306/wd71?characterEncoding=UTF-8
+#    url: jdbc:mysql://7dwd7:3306/oauth-center?characterEncoding=UTF-8
     username: root
     password: baicai@930715
     driver-class-name: com.mysql.jdbc.Driver
@@ -72,5 +72,19 @@ wd7:
   oauth2:
     code:
       timeout: 600
-      prefix: oauth2`code`
+      prefix: oauth2:code`
+security:
+  oauth2:
+    resource:
+      id: oauth2-resource
+      user-info-uri: http://7dwd7.com:8083/index/userInfo
+      prefer-token-info: true
+      token-info-uri: http://7dwd7.com:8083/oauth/check_token
+    client:
+      access-token-uri: http://localhost:8083/oauth/token
+      user-authorization-uri: http://localhost:8083/oauth/authorize
+      client-id: owen
+      client-secret: 7dwd7
+#      clientAuthenticationScheme: form
+
 
