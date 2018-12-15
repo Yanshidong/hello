@@ -106,6 +106,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .csrf()
                     .disable() //logout必备选项，据说不disable就要全post,可是为什么我post就不行捏
+
+
         ;
 
     }

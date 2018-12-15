@@ -30,6 +30,7 @@ public class MyClientDetailsService implements ClientDetailsService {
         authorizationGrantTypes.add("authorization_code");
         authorizationGrantTypes.add("refresh_token");
         authorizationGrantTypes.add("client_credentials");
+        authorizationGrantTypes.add("implicit");
         //authorization_code,password,refresh_token,client_credentials
 
         registeredRedirectUri.add("https://www.getpostman.com/oauth2/callback");
