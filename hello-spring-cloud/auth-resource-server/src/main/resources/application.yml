@@ -1,0 +1,49 @@
+server:
+  port: 8061
+  servlet:
+    context-path: /
+    session:
+      cookie:
+        domain: localhost
+        name: wd7
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://7dwd7.com:8000/eureka/
+  instance:
+    hostname: 7dwd7.com
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+    instance-id: ${spring.application.name}:${server.port}
+spring:
+  application:
+    name: auth-resource-server
+  redis:
+    host: 106.12.204.2
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1ms
+      shutdown-timeout: 100ms
+    database: 0
+
+  session:
+    redis:
+      flush-mode: immediate
+security:
+  oauth2:
+    resource:
+      id: oauth2-resource
+      user-info-uri: http://7dwd7.com:8083/index/userInfo
+      prefer-token-info: true
+      token-info-uri: http://7dwd7.com:8083/oauth/check_token
+    client:
+      access-token-uri: http://7dwd7.com:8083/oauth/token
+      user-authorization-uri: http://7dwd7.com:8083/oauth/authorize
+      client-id: barClientIdPassword
+      client-secret: secret
+#      clientAuthenticationScheme: form
