@@ -53,7 +53,7 @@ public class MyClientDetailsService implements ClientDetailsService {
         BCryptPasswordEncoder coder=new BCryptPasswordEncoder();
         clientDetails.setClientId(clientId);
         clientDetails.setResourceIds(resourceIds);//secret
-        clientDetails.setClientSecret(coder.encode("7dwd7"));
+        clientDetails.setClientSecret(coder.encode("owen"));
 //        clientDetails.setClientSecret(coder.encode("owen"));
         clientDetails.setScope(scopes);
         clientDetails.setAuthorizedGrantTypes(authorizationGrantTypes);
@@ -62,8 +62,8 @@ public class MyClientDetailsService implements ClientDetailsService {
         clientDetails.setAccessTokenValiditySeconds(36000);
         clientDetails.setRefreshTokenValiditySeconds(36000);
         clientDetails.setAdditionalInformation(additionalInfomation);
-//        clientDetails.setAutoApprove(true);
-        clientDetails.setAutoApprove(false);
+        clientDetails.setAutoApprove(true);
+//        clientDetails.setAutoApprove(false);
 
 
      return clientDetails;

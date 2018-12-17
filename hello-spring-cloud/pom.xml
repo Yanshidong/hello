@@ -42,7 +42,9 @@
 		<spring-boot-dependencies.version>2.1.1.RELEASE</spring-boot-dependencies.version>
 		<spring-cloud-dependencies.version>Greenwich.M3</spring-cloud-dependencies.version>
 		<parent.version>0.0.1-SNAPSHOT</parent.version>
-		<spring-cloud.version>Greenwich.M3</spring-cloud.version>
+		<spring-cloud.version>Greenwich.RC1</spring-cloud.version>
+
+		<com.wd7.version>0.0.1-SNAPSHOT</com.wd7.version>
 	</properties>
 
 	<dependencies>
@@ -70,6 +72,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--这东西有毒,放出来之后导致jpa和mysql炸掉,-->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-configuration-processor</artifactId>-->
+			<!--<optional>true</optional>-->
+		<!--</dependency>-->
 	</dependencies>
 
 	<build>

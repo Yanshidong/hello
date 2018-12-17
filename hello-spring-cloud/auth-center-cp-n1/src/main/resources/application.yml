@@ -19,7 +19,7 @@ eureka:
     instance-id: ${spring.application.name}:${server.port}
 spring:
   redis:
-    host: 7dwd7.com
+    host: 127.0.0.1
     port: 6379
     lettuce:
       pool:
@@ -29,8 +29,8 @@ spring:
       shutdown-timeout: 100ms
     database: 0
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/wd71?characterEncoding=UTF-8
-#    url: jdbc:mysql://7dwd7:3306/oauth-center?characterEncoding=UTF-8
+#    url: jdbc:mysql://wangde007.com:3306/oauth-center?characterEncoding=UTF-8
+    url: jdbc:mysql://7dwd7.com:3306/oauth-center?characterEncoding=UTF-8
     username: root
     password: baicai@930715
     driver-class-name: com.mysql.jdbc.Driver
@@ -81,8 +81,8 @@ security:
       prefer-token-info: true
       token-info-uri: http://7dwd7.com:8083/oauth/check_token
     client:
-      access-token-uri: http://localhost:8083/oauth/token
-      user-authorization-uri: http://localhost:8083/oauth/authorize
+      access-token-uri: http://7dwd7.com:8083/oauth/token
+      user-authorization-uri: http://7dwd7.com:8083/oauth/authorize
       client-id: owen
       client-secret: 7dwd7
 #      clientAuthenticationScheme: form

@@ -92,9 +92,11 @@
 		</dependency>
 
 		<!-- yml配置文件里 jdbc驱动 -->
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+			<!--<version>8.0.9-rc</version>-->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
